@@ -1,0 +1,40 @@
+{% extends "network/layout.html" %}
+{% block body %}
+<h1>{{user.username}}</h1>
+<p>following :{{following_count}}||followers :{{followers_count}}</p>
+<p>>{{is_following}}</p>
+
+<div id="app"></div>
+
+        <script type="text/babel">
+
+            function App() {
+
+                const [count, setCount] = React.useState(0);
+
+                function updateCount() {
+                    setCount(count + 1);
+                }
+
+                return (
+                    <div>
+                        <h1>{count}</h1>
+                        <button onClick={updateCount}>Count</button>
+                    </div>
+                );
+            }
+
+            ReactDOM.render(<App />, document.querySelector("#app"));
+        </script>
+
+
+
+{% if all_posts %}
+{% for post in all_posts %}
+<h3>{{post.owner.username}}</h3>
+<h4>{{post.text}}</h4>
+<h5>Likes: {{post.likes}}</h5> <h5>DisLikes: {{post.dislikes}}</h5>
+<h6>{{post.created_at}}</h6>
+{% endfor %}
+{% endif %}
+{% endblock %}

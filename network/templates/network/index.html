@@ -1,0 +1,20 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<div class="Newpost">
+    <h1>New Post</h1>
+   <form action="{% url 'index' %}" method="post">
+    {% csrf_token %}
+    <textarea autofocus class="form-control" name="tweet" rows="4" cols="45"></textarea>
+    <input class="btn btn-primary" type="submit" value="Post">
+   </form>
+</div>
+{% endif %}
+{% for post in all_posts %}
+<h3>{{post.owner.username}}</h3>
+<h4>{{post.text}}</h4>
+<h5>Likes: {{post.likes}}</h5> <h5>DisLikes: {{post.dislikes}}</h5>
+<h6>{{post.created_at}}</h6>
+{% endfor %}
+{% endblock %}
